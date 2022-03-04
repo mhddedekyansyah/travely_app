@@ -25,57 +25,64 @@ class _ForYouState extends State<ForYou> {
             height: 180,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Container(
-                padding: const EdgeInsets.all(20),
-                width: 167,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    image: AssetImage(place[index].url.toString()),
-                    fit: BoxFit.cover
+              itemBuilder: (context, index) => InkWell(
+                onTap: (
+                  () => Navigator.push(context, 
+                  MaterialPageRoute(builder: ((context) => Detail(place: place[index],)))
                   )
                 ),
-                child:    Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                         Container(
-                            padding: const EdgeInsets.all(7),
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(.6),
-                              borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Image.asset("assets/icons/bookmark${place[index].save! ? '.png' : '_outlined.png'}")
-                          )
-                      ],
-                    ),
-                    Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  width: 167,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage(place[index].url.toString()),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                  child:    Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(place[index].name.toString(), style: GoogleFonts.mulish(
-                          fontSize: 18,
-                          color: thirdy
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Image.asset('assets/icons/location.png', width: 20, height: 20,),
-                          Text('${place[index].city ?? ''} ${place[index].country}', style: GoogleFonts.mulish(
-                          color: thirdy.withOpacity(.4)
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,),
+                           Container(
+                              padding: const EdgeInsets.all(7),
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(.6),
+                                borderRadius: BorderRadius.circular(50)
+                              ),
+                              child: Image.asset("assets/icons/bookmark${place[index].save! ? '.png' : '_outlined.png'}")
+                            )
                         ],
-                      )
+                      ),
+                      Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(place[index].name.toString(), style: GoogleFonts.mulish(
+                            fontSize: 18,
+                            color: thirdy
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Row(
+                          children: [
+                            Image.asset('assets/icons/location.png', width: 20, height: 20,),
+                            Text('${place[index].city ?? ''} ${place[index].country}', style: GoogleFonts.mulish(
+                            color: thirdy.withOpacity(.4)
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,),
+                          ],
+                        )
+                      ],
+                ),
                     ],
-              ),
-                  ],
+                  ),
                 ),
               ), 
               separatorBuilder: (_, index) => const SizedBox(width: 10,), 
